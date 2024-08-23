@@ -15,6 +15,10 @@ class RPico(object):
     # Class to control DHT11 temperature and humidity sensor
     def __init__(self):
         self.errorMeasure = 0
+        self.errorIllumination=0
+        colors=tuple("W","IR","Tur")
+        color=0
+        intensity=32768
 
         try_n = 2
         port_not_binded = True
@@ -51,6 +55,27 @@ class RPico(object):
             if self.errorMeasure == 0:
                 logging.error(': Raspberry Pico set ports failure.')
                 self.errorMeasure = 1
+
+    def set_lights(self):
+        try:
+            mess = "ILLUminATion:{};{};\n".format(self.colors[self.color],self.intensity)
+            self.s.write(bytes(mess,'UTF-8'))
+            self.color=self.color+1
+            if color>=3:
+                color=0
+        except:
+            if self.errorIllumination == 0:
+                logging.error(': Raspberry Pico ILLUminATion failure.')
+                self.errorIllumination = 1
+
+    def clear_lights(self):
+        try:
+            mess = "ILLUminATion:W;0;\n"#Program in Pico turn off other led when one is set
+            self.s.write(bytes(mess,'UTF-8'))
+        except:
+            if self.errorIllumination == 0:
+                logging.error(': Raspberry Pico ILLUminATion failure.')
+                self.errorIllumination = 1
 
     def send_data(self):
         try:
@@ -95,7 +120,7 @@ class RPico(object):
 
 
 class Relay(object):
-    # Class to control relay
+    # Class to control relay from RPI, not pico
     def __init__(self, order, port):
         self.state = 0
 
