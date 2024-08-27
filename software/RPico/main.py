@@ -40,8 +40,8 @@ if __name__ == "__main__":
         if poll_results:
             # Read the data from stdin (read data coming from PC)
             v = sys.stdin.readline().strip()
-            print(v)
-        else:
+            #print(v)
+        #else:
             if v == "start":
                 if ports_set:
                     sen.flush = 1
