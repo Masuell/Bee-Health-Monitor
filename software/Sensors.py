@@ -16,9 +16,9 @@ class RPico(object):
     def __init__(self):
         self.errorMeasure = 0
         self.errorIllumination=0
-        colors=tuple("W","IR","Tur")
-        color=0
-        intensity=32768
+        self.colors=["W","IR","Tur"]
+        self.color=0
+        self.intensity=32768
 
         try_n = 2
         port_not_binded = True
@@ -59,10 +59,11 @@ class RPico(object):
     def set_lights(self):
         try:
             mess = "ILLUminATion:{};{};\n".format(self.colors[self.color],self.intensity)
+            #print(mess)
             self.s.write(bytes(mess,'UTF-8'))
             self.color=self.color+1
-            if color>=3:
-                color=0
+            if self.color>=3:
+                self.color=0
         except:
             if self.errorIllumination == 0:
                 logging.error(': Raspberry Pico ILLUminATion failure.')
@@ -70,8 +71,9 @@ class RPico(object):
 
     def clear_lights(self):
         try:
-            mess = "ILLUminATion:W;0;\n"#Program in Pico turn off other led when one is set
-            self.s.write(bytes(mess,'UTF-8'))
+            pass
+            #mess = "ILLUminATion:W;0;\n"#Program in Pico turn off other led when one is set
+            #self.s.write(bytes(mess,'UTF-8'))
         except:
             if self.errorIllumination == 0:
                 logging.error(': Raspberry Pico ILLUminATion failure.')

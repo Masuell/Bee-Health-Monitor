@@ -299,7 +299,7 @@ def main():
 
                 redLED.off()
 
-            elif "STOP:" in line:
+            elif "STOP" in line:
                 eventCamera_capture.clear()
                 time.sleep(2)
                 eventCameraThread_run.clear()
