@@ -13,9 +13,9 @@ eventCameraThread_run = threading.Event()
 camLogStatus = True
 
 # Camera handle thread
-class CameraThread(threading.Thread):
+class CameraThread(threading.Thread):#CameraThread je odvodena(zdedena) od threading.Thread
     def __init__(self, name, baseLog, config):
-        super(CameraThread,self).__init__()
+        super(CameraThread,self).__init__()#a tu sa vola konstruktor rodica triedy
         self.name = name
 
         # Load the cfg from the ini-file
