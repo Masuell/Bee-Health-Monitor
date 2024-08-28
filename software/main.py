@@ -187,10 +187,11 @@ def main():
         t_capture = datetime.time(hour=t_now.hour, minute=t_now.minute, second=t_now.second)
 
         # Turn on and off the camera capture together with the light
-        if t_capture >= t_on and t_capture < t_off:
-            eventCamera_capture.set()
-            #TU ZAPINAT SVETLO
+        if t_capture >= t_on and t_capture < t_off:#skontrolovat casy 
             pico.set_lights()
+            eventCamera_capture.set()
+            logging.info(': Camera should take a photo')
+            print("fotka")
             #relay.on()
         else:
             eventCamera_capture.clear()

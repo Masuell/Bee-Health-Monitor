@@ -168,6 +168,7 @@ class Camera(object):
 
                 # Capture sequence in 1s intervals until the stop flag occurs
                 self.camera.start_recording(self.output, format='mjpeg')
+                print("Kamera uklada obrazok")
 
                 while eventCamera_capture.is_set():
                     self.camera.wait_recording(1)
