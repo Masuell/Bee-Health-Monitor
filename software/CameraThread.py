@@ -12,12 +12,14 @@ eventCameraThread_run = threading.Event()
 # Global variable to stop camera capturing
 camLogStatus = True
 
+
 # Camera handle thread
 class CameraThread(threading.Thread):#CameraThread je odvodena(zdedena) od threading.Thread
+    #global Color
     def __init__(self, name, baseLog, config):
         super(CameraThread,self).__init__()#a tu sa vola konstruktor rodica triedy
         self.name = name
-
+        self.color=0
         # Load the cfg from the ini-file
         fps = config.getint('Camera', 'fps')
         exp = config.getint('Camera', 'exp')
@@ -35,7 +37,10 @@ class CameraThread(threading.Thread):#CameraThread je odvodena(zdedena) od threa
         # This loop is run until stopped from main
         while eventCameraThread_run.is_set():
             # Call the capture method periodicaly
-            self.camera.capture()
-
+            self.camera.capture(self.color)
+            print("Teoreticky by mala vzniknut fotka")
+            self.color+=1
+            if self.color>=3:
+                self.color=0
             # Sleep until the next check
             time.sleep(0.1)

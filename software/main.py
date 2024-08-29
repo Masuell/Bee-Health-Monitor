@@ -1,3 +1,4 @@
+
 import configparser
 import datetime
 import logging
@@ -188,9 +189,10 @@ def main():
 
         # Turn on and off the camera capture together with the light
         if t_capture >= t_on and t_capture < t_off:#skontrolovat casy 
-            pico.set_lights()
+            a=cam.color
+            pico.set_lights(a)
             eventCamera_capture.set()
-            logging.info(': Camera should take a photo')
+            #logging.info(': Camera should take a photo')
             print("fotka")
             #relay.on()
         else:
@@ -203,6 +205,7 @@ def main():
             time.sleep(2)
 
             eventCameraThread_run.clear()
+            
             #eventSensorThread_run.clear()
 
             logging.info(': Logging was stopped after set time.')
